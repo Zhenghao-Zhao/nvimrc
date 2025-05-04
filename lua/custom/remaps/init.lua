@@ -1,5 +1,3 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
@@ -26,10 +24,6 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Exit current buffer' })
 
@@ -39,14 +33,46 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 vim.keymap.set('n', '<leader>b', '<CMD>bprevious<CR>', { desc = 'Go to previous buffer' })
 vim.keymap.set('n', '<leader>n', '<CMD>bnext<CR>', { desc = 'Go to next buffer' })
 
-vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set('n', '<C-s>', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
-vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz')
-vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz')
-vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
-vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
+vim.keymap.set('n', '<leader>j', '<cmd>cnext<CR>zz')
+vim.keymap.set('n', '<leader>k', '<cmd>cprev<CR>zz')
+-- vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
+-- vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
 
-vim.keymap.set('n', '<C-c>', '<Esc>')
+vim.keymap.set('n', '<C-c>', '<Esc>', { noremap = true })
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
+vim.keymap.set('n', '<leader>4', '<C-w>s<C-w>v<C-w>k<C-w>v<C-w>h')
+
+-- local function organize_imports()
+--   local params = { command = '_typescript.organizeImports', arguments = { vim.api.nvim_buf_get_name(0) }, title = '' }
+--   vim.lsp.buf.execute_command(params)
+-- end
+-- vim.keymap.set('n', '<leader>i', organize_imports, { desc = 'auto organize typescript imports' })
+vim.keymap.set('n', '<leader>o', '<CMD>Oil<CR>', { desc = 'Open oil parent directory' })
+
+-- Select line content (exclude newline)
+vim.keymap.set('n', 'vv', '^vg_', { desc = 'Select line content' })
+
+vim.keymap.set('n', '<leader>`', function()
+  -- Clear all cached Lua modules (prevents 'require' from using old versions)
+  for name, _ in pairs(package.loaded) do
+    if name:match '^custom%.' or name == 'init' then -- Adjust if your modules have other prefixes
+      package.loaded[name] = nil
+    end
+  end
+
+  vim.cmd 'luafile ~/.config/nvim/init.lua' -- Full path ensures reliability
+
+  vim.notify('NVim config reloaded!', vim.log.levels.INFO)
+end)
+
+vim.keymap.set('n', '<leader>fa', ':TSToolsFixAll<CR>')
+vim.keymap.set('n', '<leader>fm', ':TSToolsAddMissingImports<CR>')
+
+-- vim.keymap.set('n', '<leader>-', function()
+--   print 'testing'
+-- end)
