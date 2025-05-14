@@ -10,7 +10,6 @@ return {
           buffer = bufnr,
           callback = function()
             -- Remove unused imports and organize imports
-            vim.cmd 'TSToolsRemoveUnusedImports'
             vim.cmd 'TSToolsOrganizeImports'
           end,
         })

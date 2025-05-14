@@ -65,13 +65,19 @@ vim.keymap.set('n', '<leader>`', function()
     end
   end
 
-  vim.cmd 'luafile ~/.config/nvim/init.lua' -- Full path ensures reliability
+  vim.cmd 'luafile ~/.config/nvim/init.lua'
 
   vim.notify('NVim config reloaded!', vim.log.levels.INFO)
 end)
 
 vim.keymap.set('n', '<leader>fa', ':TSToolsFixAll<CR>')
 vim.keymap.set('n', '<leader>fm', ':TSToolsAddMissingImports<CR>')
+
+-- Next tab (e.g., Tab key)
+vim.keymap.set('n', '<Tab>', ':tabnext<CR>', { noremap = true, silent = true })
+
+-- Previous tab (e.g., Shift + Tab)
+vim.keymap.set('n', '<S-Tab>', ':tabprevious<CR>', { noremap = true, silent = true })
 
 -- vim.keymap.set('n', '<leader>-', function()
 --   print 'testing'
