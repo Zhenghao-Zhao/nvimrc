@@ -72,12 +72,16 @@ end)
 
 vim.keymap.set('n', '<leader>fa', ':TSToolsFixAll<CR>')
 vim.keymap.set('n', '<leader>fm', ':TSToolsAddMissingImports<CR>')
+vim.keymap.set('n', '<leader>fo', ':TSToolsOrganizeImports<CR>')
 
 -- Next tab (e.g., Tab key)
-vim.keymap.set('n', '<Tab>', ':tabnext<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Tab><Tab>', ':tabnext<CR>', { noremap = true, silent = true })
 
 -- Previous tab (e.g., Shift + Tab)
 vim.keymap.set('n', '<S-Tab>', ':tabprevious<CR>', { noremap = true, silent = true })
+-- Explicitly restore Ctrl-i (same as Tab but treated differently)
+vim.keymap.set('n', '<C-i>', '<C-i>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>g', ':!go run .<CR>', { buffer = true })
 
 -- vim.keymap.set('n', '<leader>-', function()
 --   print 'testing'

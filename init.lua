@@ -15,14 +15,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Quickly compile and run go files
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'go',
-  callback = function()
-    vim.keymap.set('n', '<leader>g', ':!go run %<CR>', { buffer = true })
-    vim.keymap.set('n', '<leader>h', ':!go run *<CR>', { buffer = true })
-  end,
-})
-
 vim.cmd 'colorscheme nordfox'
 vim.g.gofmt_command = 'goimports'
