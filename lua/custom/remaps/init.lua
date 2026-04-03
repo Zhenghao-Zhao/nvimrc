@@ -82,7 +82,7 @@ vim.keymap.set('n', '<S-Tab>', ':tabprevious<CR>', { noremap = true, silent = tr
 -- Explicitly restore Ctrl-i (same as Tab but treated differently)
 vim.keymap.set('n', '<C-i>', '<C-i>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>g', ':!go run .<CR>', { buffer = true })
-
+vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { desc = 'Go to implementations' })
 -- vim.keymap.set('n', '<leader>-', function()
 --   print 'testing'
 -- end)

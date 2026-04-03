@@ -216,14 +216,7 @@ return { -- LSP Configuration & Plugins
           -- by the server configuration above. Useful when disabling
           -- certain features of an LSP (for example, turning off formatting for tsserver)
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          -- require('lspconfig')[server_name].setup(server)
-          local server_opts = servers[server_name] or {}
-
-          -- 1. Apply your custom settings/overrides to the server config
-          vim.lsp.config(server_name, server_opts)
-
-          -- 2. Enable the server so it starts on the correct FileType
-          vim.lsp.enable(server_name)
+          require('lspconfig')[server_name].setup(server)
         end,
       },
     }
